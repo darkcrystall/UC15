@@ -1,14 +1,13 @@
-import { StatusBar } from "expo-status-bar";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
-import Card from "./components/Card";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import CartaoPerfil from "./components/CartaoPerfil";
 
 export default function App() {
   return (
     <SafeAreaProvider>
-      <SafeAreaView style={styles.container}>
-        <ScrollView showsVerticalScrollIndicator={false}>
-          <Card />
+      <SafeAreaView>
+        <ScrollView>
+          <CartaoPerfil/>
         </ScrollView>
       </SafeAreaView>
     </SafeAreaProvider>
