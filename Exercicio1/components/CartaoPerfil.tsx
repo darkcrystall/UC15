@@ -1,43 +1,100 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
+import {
+  Image,
+  StyleSheet,
+  Text,
+  View,
+  ImageSourcePropType,
+  TouchableOpacity,
+} from "react-native";
 
-const CartaoPerfil = () => {
+import { COLORS } from "../palette/colors";
+
+type CartaoPerfilProps = {
+  nome: string;
+  descricao: string;
+  foto: ImageSourcePropType;
+  onSeguir: () => void;
+};
+
+export default function CartaoPerfil({
+  nome,
+  descricao,
+  foto,
+  onSeguir,
+}: CartaoPerfilProps) {
   return (
-    <View>
-      <Image source={require("../assets/icon.png")} style={styles.foto}></Image>
-      <Text style={styles.titulo}>Nome</Text>
-      <Text style={styles.descricao}>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aut iste blanditiis eligendi itaque voluptatem nihil ea dicta, recusandae debitis dolor maiores. Iure, atque odit similique corrupti officiis sunt reiciendis dignissimos.</Text>
-      <TouchableOpacity style={styles.botao}>
-        <Text style={styles.texto}>Seguir</Text>
+    <View style={styles.card}>
+      <Image source={foto} style={styles.foto} resizeMode="cover"/>
+
+      <Text style={styles.titulo}>{nome}</Text>
+
+      <Text style={styles.descricao}>{descricao}</Text>
+
+      <TouchableOpacity
+        style={styles.botao}
+        onPress={onSeguir}
+        activeOpacity={0.8}
+      >
+        <Text style={styles.textoBotao}>Seguir</Text>
       </TouchableOpacity>
     </View>
   );
-};
-
-export default CartaoPerfil;
+}
 
 const styles = StyleSheet.create({
-  foto: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
+  card: {
+    backgroundColor: COLORS.creme,
+    borderRadius: 24,
+    padding: 24,
+    gap: 20,
+    alignItems: "center",
+    minHeight: 300,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 12,
+
+    elevation: 6,
   },
+
+  foto: {
+    width: 120,
+    height: 120,
+    borderRadius: 60,
+    borderWidth: 4,
+    borderColor: COLORS.branco,
+  },
+
   titulo: {
     fontSize: 22,
-    fontWeight: "bold",
-    color: "#1a1425",
+    fontWeight: "700",
+    color: COLORS.texto,
   },
+
   descricao: {
-    fontSize: 12,
+    fontSize: 14,
+    color: "#666",
+    textAlign: "center",
+    lineHeight: 20,
   },
+
   botao: {
-    backgroundColor: "#ffb84d",
+    backgroundColor: COLORS.vermelhoEscuro,
     paddingVertical: 12,
-    paddingHorizontal: 24,
-    borderRadius: 10,
+    paddingHorizontal: 32,
+    borderRadius: 999,
   },
-  texto: {
-    color: "#1a1425",
+
+  botaoPressionado: {
+    opacity: 0.8,
+  },
+
+  textoBotao: {
+    color: COLORS.branco,
     fontWeight: "bold",
     textAlign: "center",
   },
