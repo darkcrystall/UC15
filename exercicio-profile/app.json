@@ -25,9 +25,6 @@
     },
     "web": {
       "favicon": "./assets/flor.jpg"
-    },
-    "plugins": [
-      "expo-status-bar"
-    ]
+    }
   }
 }
