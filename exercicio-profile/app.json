@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Exercicio1",
-    "slug": "Exercicio1",
+    "name": "exercicio-profile",
+    "slug": "exercicio-profile",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/flor.jpg",
@@ -25,6 +25,9 @@
     },
     "web": {
       "favicon": "./assets/flor.jpg"
-    }
+    },
+    "plugins": [
+      "expo-status-bar"
+    ]
   }
 }
