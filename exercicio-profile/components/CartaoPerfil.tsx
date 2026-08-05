@@ -10,7 +10,7 @@ import {
 
 import { COLORS } from "../palette/colors";
 
-type CartaoPerfilProps = {
+interface CartaoPerfilProps {
   nome: string;
   descricao: string;
   foto: ImageSourcePropType;
