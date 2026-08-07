@@ -1,18 +1,24 @@
-import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import React, { useState } from "react";
+import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 
 const TrocaTexto = () => {
-  const [texto, setTexto] = useState<string>("desligado");
+  const [ligado, setLigado] = useState(false);
+
+  const alternarEstado = () => {
+    setLigado((estadoAtual) => !estadoAtual);
+  };
+
   return (
-    <View>
-      <Text>{texto}</Text>
+    <View style={styles.container}>
+
       <TouchableOpacity
-        style={styles.botao}
-        onPress={() => {
-          setTexto(texto === "desligado" ? "ligado" : "desligado");
-        }}
+        style={[
+          styles.botao,
+          ligado ? styles.botaoLigado : styles.botaoDesligado,
+        ]}
+        onPress={alternarEstado}
       >
-        <Text style={styles.textoBotao}>Ligar</Text>
+        <Text style={styles.textoBotao}>{ligado ? "Desligar" : "Ligar"}</Text>
       </TouchableOpacity>
     </View>
   );
@@ -21,14 +27,42 @@ const TrocaTexto = () => {
 export default TrocaTexto;
 
 const styles = StyleSheet.create({
-  botao: {
-    padding: 10,
-    backgroundColor: "blue",
+  container: {
+    flex: 1,
+    justifyContent: "center",
     alignItems: "center",
-    borderRadius: 5,
-    margin: 10,
+    gap: 16,
   },
+
+  texto: {
+    fontSize: 18,
+    fontWeight: "bold",
+  },
+
+  textoLigado: {
+    color: "green",
+  },
+
+  textoDesligado: {
+    color: "red",
+  },
+
+  botao: {
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+    borderRadius: 8,
+  },
+
+  botaoLigado: {
+    backgroundColor: "red",
+  },
+
+  botaoDesligado: {
+    backgroundColor: "green",
+  },
+
   textoBotao: {
     color: "#fff",
+    fontWeight: "600",
   },
 });
