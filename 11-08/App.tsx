@@ -1,20 +1,23 @@
-import { StyleSheet, Text, View } from 'react-native';
-import ListaUsuarios from './components/ListaUsuarios';
-import ListaProdutos from './components/ListaProdutos';
+import { SafeAreaViewBase, StyleSheet, Text, View } from "react-native";
+import ListaUsuarios from "./components/ListaUsuarios";
+import ListaProdutos from "./components/ListaProdutos";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <ListaProdutos></ListaProdutos>
-    </View>
+    <SafeAreaProvider>
+      <SafeAreaView style={styles.container}>
+          <ListaProdutos></ListaProdutos>
+      </SafeAreaView>
+    </SafeAreaProvider>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });

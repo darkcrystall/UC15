@@ -1,17 +1,38 @@
-import { StyleSheet, Text, Touchable, TouchableOpacity, View } from 'react-native'
-import React, { useState } from 'react'
-import { TextInput } from 'react-native'
+import { StyleSheet, TextInput, View } from "react-native";
+import { COLORS } from "../palette/colors";
 
-const Busca = () => {
-    const [termo, setTermo] = useState<string>("")
-  return (
-    <View>
-        <TextInput placeholder='Digite um termo para pesquisar...'>{termo}</TextInput>
-        <TouchableOpacity onPress={() => setTermo}></TouchableOpacity>
-    </View>
-  )
+interface BuscaProps {
+  termo: string;
+  setTermo: (texto: string) => void;
 }
 
-export default Busca
+export default function Busca({ termo, setTermo }: BuscaProps) {
+  return (
+    <View style={styles.container}>
+      <TextInput
+        style={styles.input}
+        placeholder="Digite um termo para pesquisar..."
+        value={termo}
+        onChangeText={setTermo}
+      />
+    </View>
+  );
+}
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 16,
+  },
+
+  input: {
+    backgroundColor: "#FFF",
+    borderWidth: 1,
+    borderColor: COLORS.destaque,
+    borderRadius: 12,
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    fontSize: 16,
+    marginBottom: 20,
+  },
+});
