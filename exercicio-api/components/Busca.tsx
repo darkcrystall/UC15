@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React from "react";
+import { useState } from "react";
 
 interface BuscaProps {
   termo: string;
@@ -13,14 +13,23 @@ interface BuscaProps {
 }
 
 const Busca = ({ termo, setTermo }: BuscaProps) => {
+  const [texto, setTexto] = useState("");
+
   return (
-    <View>
+    <View style={styles.container}>
       <TextInput
-        placeholder="Digite o nome do pokémon para pesquisar..."
-        value={termo}
+        style={styles.input}
+        placeholder="Digite o nome de um Pokémon..."
+        placeholderTextColor="#888"
+        value={texto}
+        onChangeText={setTexto}
       />
-      <TouchableOpacity onPress={() => setTermo}>
-        <Text>Buscar</Text>
+
+      <TouchableOpacity
+        style={styles.botao}
+        onPress={() => setTermo(texto.trim().toLowerCase())}
+      >
+        <Text style={styles.textoBotao}>Buscar</Text>
       </TouchableOpacity>
     </View>
   );
@@ -28,4 +37,33 @@ const Busca = ({ termo, setTermo }: BuscaProps) => {
 
 export default Busca;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    marginBottom: 20,
+  },
+
+  input: {
+    height: 48,
+    borderWidth: 1,
+    borderColor: "#ddd",
+    borderRadius: 12,
+    paddingHorizontal: 16,
+    backgroundColor: "#fff",
+    fontSize: 16,
+  },
+
+  botao: {
+    height: 48,
+    marginTop: 10,
+    borderRadius: 12,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#222",
+  },
+
+  textoBotao: {
+    color: "#fff",
+    fontSize: 16,
+    fontWeight: "600",
+  },
+});
