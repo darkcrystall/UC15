@@ -1,4 +1,4 @@
-import { StyleSheet, Text } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import CardPokemon, { DadosPokemon } from "./CardPokemon";
 import { FlatList } from "react-native";
@@ -14,7 +14,7 @@ const ListPokemon = () => {
     const carregarPreview = async () => {
       try {
         const response = await fetch(
-          "https://pokeapi.co/api/v2/pokemon?limit=20",
+          "https://pokeapi.co/api/v2/pokemon?limit=50"
         );
 
         const dados = await response.json();
@@ -23,7 +23,7 @@ const ListPokemon = () => {
           dados.results.map(async (pokemon: { url: string }) => {
             const response = await fetch(pokemon.url);
             return response.json();
-          }),
+          })
         );
         setPreview(detalhes);
         setPokemons(detalhes);
@@ -44,7 +44,7 @@ const ListPokemon = () => {
     const buscarPokemon = async () => {
       try {
         const response = await fetch(
-          `https://pokeapi.co/api/v2/pokemon/${termo.toLowerCase()}`,
+          `https://pokeapi.co/api/v2/pokemon/${termo.toLowerCase()}`
         );
 
         if (!response.ok) {
@@ -64,8 +64,8 @@ const ListPokemon = () => {
 
   return (
     <ScrollView>
-      <Busca termo={termo} setTermo={setTermo}></Busca>
-        {" "}
+      <View style={styles.container}>
+        <Busca termo={termo} setTermo={setTermo}></Busca>
         <FlatList
           data={pokemons}
           keyExtractor={(item) => item.id.toString()}
@@ -75,6 +75,7 @@ const ListPokemon = () => {
           contentContainerStyle={styles.lista}
           ListEmptyComponent={<Text>Nenhum pokémon encontrado</Text>}
         />
+      </View>
     </ScrollView>
   );
 };
