@@ -14,7 +14,7 @@ const ListPokemon = () => {
     const carregarPreview = async () => {
       try {
         const response = await fetch(
-          "https://pokeapi.co/api/v2/pokemon?limit=50"
+          "https://pokeapi.co/api/v2/pokemon?limit=100"
         );
 
         const dados = await response.json();
