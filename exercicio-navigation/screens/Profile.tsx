@@ -71,6 +71,6 @@ const styles = StyleSheet.create({
     lineHeight: 24,
     textAlign: "center",
     color: "#444",
-    width: "40%"
+    width: "60%"
   },
 });

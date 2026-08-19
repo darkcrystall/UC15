@@ -17,7 +17,7 @@ const FavoritesStack = ({
 }: FavoritesStackProps) => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Favorites">
+      <Stack.Screen name="My favorites">
         {(props) => (
           <Favorites
             {...props}
