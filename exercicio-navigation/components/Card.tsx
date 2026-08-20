@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
 
   detailsButton: {
     flex: 1,
-    backgroundColor: "#2563eb",
+    backgroundColor: "#6366F1",
     padding: 10,
     borderRadius: 8,
     alignItems: "center",
@@ -128,14 +128,14 @@ const styles = StyleSheet.create({
 
   favoriteButton: {
     flex: 1,
-    backgroundColor: "#16a34a",
+    backgroundColor: "#EC4899",
     padding: 10,
     borderRadius: 8,
     alignItems: "center",
   },
 
   favoriteButtonActive: {
-    backgroundColor: "#dc2626",
+    backgroundColor: "#E11D48",
   },
 
   buttonText: {

@@ -13,22 +13,20 @@ interface TabNavigatorProps {
   toggleFavorite: (show: Show) => void;
 }
 
-const TabNavigator = ({
-  favorites,
-  toggleFavorite,
-}: TabNavigatorProps) => {
+const TabNavigator = ({ favorites, toggleFavorite }: TabNavigatorProps) => {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator
+      screenOptions={{
+        tabBarActiveTintColor: "#7c38ca",
+        tabBarInactiveTintColor: "#999",
+      }}
+    >
       <Tab.Screen
         name="Home"
         options={{
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
-            <Ionicons
-              name="home-outline"
-              color={color}
-              size={size}
-            />
+            <Ionicons name="home-outline" color={color} size={size} />
           ),
         }}
       >
@@ -46,11 +44,7 @@ const TabNavigator = ({
         options={{
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
-            <Ionicons
-              name="heart-outline"
-              color={color}
-              size={size}
-            />
+            <Ionicons name="heart-outline" color={color} size={size} />
           ),
         }}
       >
@@ -68,11 +62,7 @@ const TabNavigator = ({
         component={Profile}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <Ionicons
-              name="person-outline"
-              color={color}
-              size={size}
-            />
+            <Ionicons name="person-outline" color={color} size={size} />
           ),
         }}
       />
