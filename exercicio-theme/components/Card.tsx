@@ -1,40 +1,90 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React, { useEffect, useState } from "react";
+import {
+  ActivityIndicator,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+type Tema = "claro" | "escuro";
+
 const Card = () => {
-  const [tema, setTema] = useState<string>("claro");
+  const [tema, setTema] = useState<Tema>("claro");
+  const [carregando, setCarregando] = useState(true);
+
   useEffect(() => {
-    const pegarTema = async () => {
-      const tema = await AsyncStorage.getItem("tema");
-      if (tema) {
-        setTema(tema);
+    const carregarTema = async () => {
+      try {
+        const temaSalvo = await AsyncStorage.getItem("tema");
+
+        if (temaSalvo === "claro" || temaSalvo === "escuro") {
+          setTema(temaSalvo);
+        }
+      } catch (error) {
+        console.error("Erro ao carregar o tema:", error);
+      } finally {
+        setCarregando(false);
       }
     };
-    pegarTema();
+
+    carregarTema();
   }, []);
+
   const trocarTema = async () => {
-    const temaAtual = tema === "claro" ? "escuro" : "claro";
-    await AsyncStorage.setItem(temaAtual, tema);
+    const novoTema: Tema = tema === "claro" ? "escuro" : "claro";
+
+    try {
+      await AsyncStorage.setItem("tema", novoTema);
+      setTema(novoTema);
+    } catch (error) {
+      console.error("Erro ao salvar o tema:", error);
+    }
   };
+
+  if (carregando) {
+    return (
+      <View style={styles.carregando}>
+        <ActivityIndicator size="large" />
+      </View>
+    );
+  }
+
+  const temaEscuro = tema === "escuro";
+
   return (
     <View
       style={[
         styles.pagina,
-        tema === "escuro" ? styles.paginaEscura : styles.paginaClara,
+        temaEscuro ? styles.paginaEscura : styles.paginaClara,
       ]}
     >
-      <Text style={tema === "escuro" ? styles.textoClaro : styles.textoEscuro}>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Placeat
-        ducimus, iste nobis tenetur veniam beatae ullam? Veniam nam maxime animi
-        sequi quasi beatae fugit labore molestias adipisci odio, accusamus
-        assumenda.
+      <Text
+        style={[
+          styles.texto,
+          temaEscuro ? styles.textoClaro : styles.textoEscuro,
+        ]}
+      >
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat
+        ducimus, iste nobis tenetur veniam beatae ullam.
       </Text>
-      <TouchableOpacity style={[
-        styles.botao,
-        tema === "escuro" ? styles.botaoEscuro : styles.botaoClaro,
-      ]} onPress={trocarTema}>
-        <Text>{tema === "escuro" ? "Tema claro" : "Tema escuro"}</Text>
+
+      <TouchableOpacity
+        style={[
+          styles.botao,
+          temaEscuro ? styles.botaoEscuro : styles.botaoClaro,
+        ]}
+        onPress={trocarTema}
+      >
+        <Text
+          style={[
+            styles.texto,
+            temaEscuro ? styles.textoClaro : styles.textoEscuro,
+          ]}
+        >
+          {temaEscuro ? "Ativar tema claro" : "Ativar tema escuro"}
+        </Text>
       </TouchableOpacity>
     </View>
   );
@@ -44,27 +94,55 @@ export default Card;
 
 const styles = StyleSheet.create({
   pagina: {
-    height: "100%",
+    flex: 1,
+    padding: 20,
+    justifyContent: "center",
+    gap: 30
   },
+
   paginaClara: {
-    backgroundColor: "white",
+    backgroundColor: "#FFFFFF",
   },
+
   paginaEscura: {
-    backgroundColor: "black",
+    backgroundColor: "#121212",
   },
+
+  texto: {
+    fontSize: 18,
+    lineHeight: 26,
+  },
+
+  textoClaro: {
+    color: "#FFFFFF",
+  },
+
+  textoEscuro: {
+    color: "#121212",
+  },
+
   botao: {
-    padding: 12,
+    padding: 14,
     borderRadius: 10,
     alignItems: "center",
   },
+
   botaoClaro: {
-    backgroundColor: "#ccc",
+    backgroundColor: "#DDDDDD",
   },
+
   botaoEscuro: {
-    backgroundColor: "#eee",
+    backgroundColor: "#333333",
   },
-  textoClaro: {
-    color: "black",
+
+  textoBotao: {
+    fontSize: 16,
+    fontWeight: "600",
   },
-  textoEscuro: {},
+
+  carregando: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
 });
