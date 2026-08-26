@@ -70,35 +70,21 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "rgba(0, 0, 0, 0.6)",
-    padding: 20,
   },
 
   caixa: {
     height: 300,
-    width: 500,
+    width: 300,
     alignItems: "center",
     backgroundColor: "#fff",
     borderRadius: 16,
-    padding: 24,
   },
 
   gif: {
-    width: "100%",
+    width: 300,
     height: 200,
     marginBottom: 16,
     borderRadius: 10
-  },
-
-  titulo: {
-    fontSize: 24,
-    fontWeight: "bold",
-    marginBottom: 8,
-  },
-
-  descricao: {
-    textAlign: "center",
-    color: "#666",
-    marginBottom: 20,
   },
 
   botaoAbrir: {

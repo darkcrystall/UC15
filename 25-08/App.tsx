@@ -2,14 +2,17 @@ import { StyleSheet, Text, View } from "react-native";
 import ListaFavoritos from "./components/ListaFavoritos";
 import BotaoSom from "./components/BotaoSom";
 import MeuModal from "./components/MeuModal";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <ListaFavoritos></ListaFavoritos>
-      <BotaoSom></BotaoSom>
-      <MeuModal></MeuModal>
-    </View>
+    <SafeAreaProvider>
+      <SafeAreaView style={styles.container}>
+        <ListaFavoritos></ListaFavoritos>
+        <BotaoSom></BotaoSom>
+        <MeuModal></MeuModal>
+      </SafeAreaView>
+    </SafeAreaProvider>
   );
 }
 
@@ -19,6 +22,5 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
-    flexDirection: "row"
   },
 });
