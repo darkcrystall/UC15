@@ -1,29 +1,57 @@
-import { StyleSheet, View, Modal, Text, TouchableOpacity } from "react-native";
-import React, { useState } from "react";
+import {
+  Image,
+  Modal,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import React, { useEffect, useState } from "react";
+import { useAudioPlayer } from "expo-audio";
 
 const MeuModal = () => {
-  const [visivel, setVisivel] = useState<boolean>(false);
+  const [visivel, setVisivel] = useState(false);
+
+  const player = useAudioPlayer(require("../assets/music.mp3"));
+
+  useEffect(() => {
+    if (visivel) {
+      player.seekTo(0);
+      player.play();
+    } else {
+      player.pause();
+      player.seekTo(0);
+    }
+  }, [visivel]);
+
+  const fecharModal = () => {
+    setVisivel(false);
+  };
 
   return (
-    <View>
+    <View style={styles.container}>
+      <TouchableOpacity
+        style={styles.botaoAbrir}
+        onPress={() => setVisivel(true)}
+      >
+        <Text style={styles.textoBotao}>Abrir modal</Text>
+      </TouchableOpacity>
+
       <Modal
         visible={visivel}
-        animationType="slide"
-        transparent={true}
-        onRequestClose={() => setVisivel(false)}
+        animationType="fade"
+        transparent
+        onRequestClose={fecharModal}
       >
         <View style={styles.fundo}>
           <View style={styles.caixa}>
-            <Text>Conteúdo do modal aqui</Text>
-            <TouchableOpacity onPress={() => setVisivel(false)}>
-              <Text>Fechar</Text>
+            <Image source={require("../assets/swan.gif")} style={styles.gif} />
+            <TouchableOpacity style={styles.botaoFechar} onPress={fecharModal}>
+              <Text style={styles.textoBotao}>Fechar</Text>
             </TouchableOpacity>
           </View>
         </View>
       </Modal>
-      <TouchableOpacity onPress={() => setVisivel(true)}>
-        <Text>Abrir modal</Text>
-      </TouchableOpacity>
     </View>
   );
 };
@@ -31,11 +59,64 @@ const MeuModal = () => {
 export default MeuModal;
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
   fundo: {
-    backgroundColor: "blue",
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.6)",
     padding: 20,
   },
+
   caixa: {
-    backgroundColor: "red",
+    height: 300,
+    width: 500,
+    alignItems: "center",
+    backgroundColor: "#fff",
+    borderRadius: 16,
+    padding: 24,
+  },
+
+  gif: {
+    width: "100%",
+    height: 200,
+    marginBottom: 16,
+    borderRadius: 10
+  },
+
+  titulo: {
+    fontSize: 24,
+    fontWeight: "bold",
+    marginBottom: 8,
+  },
+
+  descricao: {
+    textAlign: "center",
+    color: "#666",
+    marginBottom: 20,
+  },
+
+  botaoAbrir: {
+    backgroundColor: "#3498db",
+    paddingHorizontal: 24,
+    paddingVertical: 12,
+    borderRadius: 8,
+  },
+
+  botaoFechar: {
+    backgroundColor: "#e74c3c",
+    paddingHorizontal: 24,
+    paddingVertical: 12,
+    borderRadius: 8,
+  },
+
+  textoBotao: {
+    color: "#fff",
+    fontWeight: "bold",
   },
 });

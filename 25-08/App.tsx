@@ -1,10 +1,14 @@
 import { StyleSheet, Text, View } from "react-native";
 import ListaFavoritos from "./components/ListaFavoritos";
+import BotaoSom from "./components/BotaoSom";
+import MeuModal from "./components/MeuModal";
 
 export default function App() {
   return (
     <View style={styles.container}>
       <ListaFavoritos></ListaFavoritos>
+      <BotaoSom></BotaoSom>
+      <MeuModal></MeuModal>
     </View>
   );
 }
@@ -15,5 +19,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+    flexDirection: "row"
   },
 });
