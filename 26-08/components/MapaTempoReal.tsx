@@ -39,7 +39,7 @@ const MapaTempoReal = () => {
             latitudeDelta: 0.01,
             longitudeDelta: 0.01,
           });
-        }
+        },
       );
     };
 
