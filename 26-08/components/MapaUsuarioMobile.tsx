@@ -10,7 +10,7 @@ import React, { useEffect, useState } from "react";
 import * as Location from "expo-location";
 import MapView, { Marker, Region } from "react-native-maps";
 
-const MapaUsuario = () => {
+const MapaUsuarioMobile = () => {
   const [localização, setLocalizacao] = useState<Region>();
   // array de pins mara rastrear as marcações
   const [pins, setPins] = useState<{ latitude: number; longitude: number }[]>(
@@ -79,7 +79,7 @@ const MapaUsuario = () => {
   );
 };
 
-export default MapaUsuario;
+export default MapaUsuarioMobile;
 
 const styles = StyleSheet.create({
   mapa: { flex: 1, width: "100%" },

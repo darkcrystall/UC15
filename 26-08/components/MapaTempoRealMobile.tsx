@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import * as Location from "expo-location";
 import MapView, { Marker, Region } from "react-native-maps";
 
-const MapaTempoReal = () => {
+const MapaTempoRealMobile = () => {
   // guarda a localização atual do usuário
   const [localizacao, setLocalizacao] = useState<Region>();
 
@@ -72,7 +72,7 @@ const MapaTempoReal = () => {
   );
 };
 
-export default MapaTempoReal;
+export default MapaTempoRealMobile;
 
 const styles = StyleSheet.create({
   mapa: {
